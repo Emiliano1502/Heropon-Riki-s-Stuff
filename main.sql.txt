@@ -1,0 +1,6 @@
+-- create a table
+CREATE TABLE alumnos (
+  idAlumno INTEGER PRIMARY KEY,
+  NombreAlumno TEXT NOT NULL,
+  Genero TEXT NOT NULL
+);
