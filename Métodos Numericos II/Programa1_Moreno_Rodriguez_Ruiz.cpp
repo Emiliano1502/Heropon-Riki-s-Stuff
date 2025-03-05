@@ -6,7 +6,7 @@
 int N, i, j, k, iter, MAX_ITER;
 double B[3][3], fx[3], s[3], y[3], x_new[3], fx_new[3];
 double norm, error_rel, TOL;
-// DefiniciÛn de los sistemas de ecuaciones
+// Definici√≥n de los sistemas de ecuaciones
 void system_1(double x[], double f[]) {
     f[0] = x[0] * x[0] + x[0] * x[1] + 2 * x[1] * x[1] - 5;
     f[1] = 5 * x[1] - 2 * x[0] * x[1] * x[1] + 3;
@@ -29,7 +29,7 @@ void system_4(double x[], double f[]) {
     f[2] = x[0] * x[0] - x[1] * x[1] + x[2] * x[2] - 9;
 }
 
-// AproximaciÛn de la matriz Jacobiana
+// Aproximaci√≥n de la matriz Jacobiana
 void jacobian_approx(double x[], double B[MAX_N][MAX_N], void (*func)(double[], double[])) {
     double fx[MAX_N], fxh[MAX_N], h = 1e-5;
     func(x, fx);
@@ -45,7 +45,7 @@ void jacobian_approx(double x[], double B[MAX_N][MAX_N], void (*func)(double[], 
     }
 }
 
-// Resolver sistema lineal por eliminaciÛn de Gauss con pivoteo
+// Resolver sistema lineal por eliminaci√≥n de Gauss con pivoteo
 void solve_linear_system(double B[MAX_N][MAX_N], double fx[MAX_N], double s[MAX_N]) {
     double temp[MAX_N];
 
@@ -83,7 +83,7 @@ void solve_linear_system(double B[MAX_N][MAX_N], double fx[MAX_N], double s[MAX_
     }
 }
 
-// MÈtodo de Broyden con solicitud de puntos iniciales
+// M√©todo de Broyden con solicitud de puntos iniciales
 void broyden(double x[], void (*func)(double[], double[])) {
     double B[MAX_N][MAX_N], fx[MAX_N], s[MAX_N], y[MAX_N], x_new[MAX_N], fx_new[MAX_N];
     double norm, error_rel;
@@ -145,7 +145,7 @@ void broyden_3x3(double x[], void (*func)(double[], double[])) {
     double B[3][3], fx[3], s[3], y[3], x_new[3], fx_new[3], Bs[3], denom;
     double norm, error_rel;
 
-    jacobian_approx(x, B, func);  // AproximaciÛn inicial de la Jacobiana
+    jacobian_approx(x, B, func);  // Aproximaci√≥n inicial de la Jacobiana
 
     for (iter = 0; iter < MAX_ITER; iter++) {
         func(x, fx);  // Evaluar F(x)
@@ -161,7 +161,7 @@ void broyden_3x3(double x[], void (*func)(double[], double[])) {
         for (i = 0; i < 3; i++) 
             y[i] = fx_new[i] - fx[i];
 
-        // C·lculo del error
+        // C√°lculo del error
         norm = 0;
         for (i = 0; i < 3; i++) 
             norm += fx_new[i] * fx_new[i];
@@ -179,7 +179,7 @@ void broyden_3x3(double x[], void (*func)(double[], double[])) {
             return;
         }
 
-        // C·lculo de Bs = B * s
+        // C√°lculo de Bs = B * s
         for (i = 0; i < 3; i++) {
             Bs[i] = 0;
             for (j = 0; j < 3; j++) {
@@ -192,7 +192,7 @@ void broyden_3x3(double x[], void (*func)(double[], double[])) {
         for (i = 0; i < 3; i++) 
             denom += s[i] * s[i];
 
-        if (fabs(denom) > 1e-10) {  // Evitar divisiÛn por cero
+        if (fabs(denom) > 1e-10) {  // Evitar divisi√≥n por cero
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
                     B[i][j] += ((y[i] - Bs[i]) * s[j]) / denom;
@@ -200,7 +200,7 @@ void broyden_3x3(double x[], void (*func)(double[], double[])) {
             }
         }
 
-        // Actualizar x para la siguiente iteraciÛn
+        // Actualizar x para la siguiente iteraci√≥n
         for (i = 0; i < 3; i++) 
             x[i] = x_new[i];
     }
@@ -210,7 +210,7 @@ void broyden_3x3(double x[], void (*func)(double[], double[])) {
 }
 
 
-// Men˙ para seleccionar el sistema y pedir los valores iniciales
+// Men√∫ para seleccionar el sistema y pedir los valores iniciales
 int main() {
 	
     int choice;
@@ -274,10 +274,10 @@ int main() {
                 broyden_3x3(x, system_4);
                 break;
             default: 
-                printf("OpciÛn inv·lida.\n");
+                printf("Opci√≥n inv√°lida.\n");
         }
 
-    // LIMPIAR BUFFER ANTES DE PEDIR EL SIGUIENTE CAR¡CTER
+    // LIMPIAR BUFFER ANTES DE PEDIR EL SIGUIENTE CAR√ÅCTER
         while (getchar() != '\n');  
 
         printf("\nDesea resolver otro sistema? (s/n): ");
