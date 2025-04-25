@@ -2,7 +2,12 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
+#include <graphics.h>
+#include <cmath>
+#include <math.h>
+
 #define MAX 100
+#define PI 3.14159265
 
 void Datos(int *v, int *l) {
   do {
@@ -100,7 +105,7 @@ void matrizincidencia(int v, int l, int aristas[][2], int esDirigida) {
     printf("V%c ",'A'+i);
     for (int j = 0; j < l; j++) {
       if (bucle[j] && i == aristas[j][0] -1 && esDirigida) {
-        printf("±1");
+        printf("%c1 ", 241);  // Mostrará ±1 en consolas compatibles
       } else {
         printf("%2d ", AG[i][j]);
       }
@@ -451,7 +456,87 @@ void clasificarEulerianaUnicursal(int v, int ady[MAX][MAX]) {
   }
 }
 
-	int main() {
+//creacion Nodo
+struct Nodo {
+    int x, y;
+    char nombre;
+};
+
+//Dibujar grafo
+void dibujarGrafo(int v, int aristas[][2], int l, bool esDirigida) {
+    struct Nodo nodo[MAX];
+
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    setbkcolor(WHITE);
+    cleardevice();
+    setcolor(BLACK);
+
+    int cx = getmaxx() / 2;
+    int cy = getmaxy() / 2;
+    int radio = 200;
+
+    // Posiciones circulares
+    for (int i = 0; i < v; i++) {
+        float angulo = 2 * PI * i / v;
+        nodo[i].x = cx + radio * cos(angulo);
+        nodo[i].y = cy + radio * sin(angulo);
+        nodo[i].nombre = 'A' + i;
+    }
+
+    // Dibujar aristas
+    for (int i = 0; i < l; i++) {
+        int origen = aristas[i][0] - 1;
+        int destino = aristas[i][1] - 1;
+
+        int x1 = nodo[origen].x;
+        int y1 = nodo[origen].y;
+        int x2 = nodo[destino].x;
+        int y2 = nodo[destino].y;
+
+        if (origen == destino) {
+            setcolor(RED);
+            arc(x1, y1 - 20, 0, 360, 15);
+            char etiqueta[10];
+            sprintf(etiqueta, "L%d", i + 1);
+            outtextxy(x1 + 10, y1 - 35, etiqueta);
+            continue;
+        }
+
+        setcolor(BLUE);
+        line(x1, y1, x2, y2);
+
+        int xm = (x1 + x2) / 2;
+        int ym = (y1 + y2) / 2;
+        char etiqueta[10];
+        sprintf(etiqueta, "L%d", i + 1);
+        outtextxy(xm, ym, etiqueta);
+
+        if (esDirigida) {
+            float angle = atan2(y2 - y1, x2 - x1);
+            int arrowSize = 10;
+            int px = x2 - 10 * cos(angle);
+            int py = y2 - 10 * sin(angle);
+            line(px, py, px - arrowSize * cos(angle - PI / 6), py - arrowSize * sin(angle - PI / 6));
+            line(px, py, px - arrowSize * cos(angle + PI / 6), py - arrowSize * sin(angle + PI / 6));
+        }
+    }
+
+    // Dibujar nodos
+    setcolor(BLACK);
+    setfillstyle(SOLID_FILL, CYAN);
+    for (int i = 0; i < v; i++) {
+        fillellipse(nodo[i].x, nodo[i].y, 20, 20);
+        char nombre[2] = {nodo[i].nombre, '\0'};
+        outtextxy(nodo[i].x - 5, nodo[i].y - 5, nombre);
+    }
+
+    getch();
+    closegraph();
+}
+
+int main() {
   int v, l, g;
   char reintentar;
 
@@ -527,6 +612,9 @@ void clasificarEulerianaUnicursal(int v, int ady[MAX][MAX]) {
     if (g == 1) {
       verificarInicialesFinales(v, ady);
     }
+    
+    // Mostrar la gráfica visualmente
+    dibujarGrafo(v, aristas, l, g == 1);
 
     printf("\n%cDesea ingresar otra gr%cfica? (s/n): ", 168, 160);
     scanf(" %c", &reintentar);
