@@ -103,7 +103,7 @@ void matrizincidencia(int v, int l, int aristas[][2], int esDirigida) {
       AG[llega][i] = 1;
     }
   }
-  //Impresión
+  //ImpresiÃ³n
   printf("\nLa matriz de Incidencia es:\n    ");
   for (int j=0;j<l;j++)
     printf("L%d ",j+1);
@@ -112,7 +112,7 @@ void matrizincidencia(int v, int l, int aristas[][2], int esDirigida) {
     printf("V%c ",'A'+i);
     for (int j = 0; j < l; j++) {
       if (bucle[j] && i == aristas[j][0] -1 && esDirigida==2) {
-        printf("%c1 ", 241);  // Mostrará ±1 en consolas compatibles
+        printf("%c1 ", 241);  // MostrarÃ¡ Â±1 en consolas compatibles
       } else {
         printf("%2d ", AG[i][j]);
       }
@@ -171,7 +171,7 @@ void matrizaccesibilidad(int v, int XG[MAX][MAX]) {
     }
   }
 
-  // Usamos la fórmula (v^2 + v) / 2 para la cantidad de pasos
+  // Usamos la fÃ³rmula (v^2 + v) / 2 para la cantidad de pasos
   int pasos = (v * v + v) / 2;
 
   for (int step = 2; step <= pasos; step++) {
@@ -196,7 +196,7 @@ void matrizaccesibilidad(int v, int XG[MAX][MAX]) {
         MG[i][j] += Potencia[i][j];
   }
 
-  // Impresión de matriz de accesibilidad
+  // ImpresiÃ³n de matriz de accesibilidad
   printf("\nMatriz de Accesibilidad:\n   ");
   for (int j = 0; j < v; j++)
     printf(" %c", 'A' + j);
@@ -339,7 +339,7 @@ int esArbol(int v, int l, int ady[MAX][MAX]) {
 
   for (int i = 0; i < v; i++) {
     if (!visitadoGlobal[i])
-      return 0; // No está conectado
+      return 0; // No estÃ¡ conectado
   }
 
   return !tieneCiclo;
@@ -380,7 +380,7 @@ void clasificarBalanceada(int v, int ady[MAX][MAX]) {
 }
 
 void verificarInicialesFinales(int v, int ady[MAX][MAX]) {
-  printf("\nV%crtices Iniciales y Finales (solo digráfica):\n", 130);
+  printf("\nV%crtices Iniciales y Finales (solo digrÃ¡fica):\n", 130);
 
   for (int i = 0; i < v; i++) {
     int in = 0, out = 0;
@@ -400,7 +400,7 @@ void verificarInicialesFinales(int v, int ady[MAX][MAX]) {
 void detectarLineasEnSerie(int v, int l, int aristas[][2]) {
     int grado[MAX] = {0};
 
-    // Contar el grado de cada vértice
+    // Contar el grado de cada vÃ©rtice
     for (int i = 0; i < l; i++) {
         grado[aristas[i][0] - 1]++;
         grado[aristas[i][1] - 1]++;
@@ -411,7 +411,7 @@ void detectarLineasEnSerie(int v, int l, int aristas[][2]) {
     int encontradas = 0;
     for (int i = 0; i < l; i++) {
         for (int j = i + 1; j < l; j++) {
-            // Buscar vértice en común
+            // Buscar vÃ©rtice en comÃºn
             int a1 = aristas[i][0], b1 = aristas[i][1];
             int a2 = aristas[j][0], b2 = aristas[j][1];
 
@@ -420,7 +420,7 @@ void detectarLineasEnSerie(int v, int l, int aristas[][2]) {
             else if (b1 == a2 || b1 == b2) comun = b1;
 
             if (comun != -1 && grado[comun - 1] == 2) {
-                printf("Aristas L%d y L%d están en serie mediante V%c\n", i + 1, j + 1, 'A' + comun - 1);
+                printf("Aristas L%d y L%d estÃ¡n en serie mediante V%c\n", i + 1, j + 1, 'A' + comun - 1);
                 encontradas = 1;
             }
         }
@@ -597,7 +597,7 @@ int main() {
   int opcion, subopcion;
 
   do {
-    // Menú principal con créditos visibles siempre
+    // MenÃº principal con crÃ©ditos visibles siempre
     do {
       limpiarPantalla();
       printf("Bienvenido al generador de matrices de graf%cs.\n", 162);
