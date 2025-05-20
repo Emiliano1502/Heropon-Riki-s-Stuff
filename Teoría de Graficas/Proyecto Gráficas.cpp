@@ -39,6 +39,8 @@ int tieneBucles(int lol, int aristas[][2]) {
     if (aristas[i][0] == aristas[i][1]) {
       printf("Bucle detectado en el nodo V%c (arista L%d)\n", 'A' + aristas[i][0] - 1, i + 1);
       encontrado = 1;
+    } else {
+      printf("No se encontraron bucles ;((");
     }
   }
   return encontrado;
