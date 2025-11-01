@@ -17,7 +17,7 @@ FONT = pygame.font.Font(None, 32)
 
 # --- CARGA DE IMÁGENES ---
 player_img = pygame.image.load("assets/player.png")
-wild_img = pygame.image.load("assets/wild_pokemon.png")
+wild_img = pygame.image.load("assets/pokemon.png")
 
 # --- ESTADO DEL JUGADOR ---
 player_rect = player_img.get_rect(center=(WIDTH//2, HEIGHT//2))
