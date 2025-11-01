@@ -1,0 +1,12 @@
+[
+  {
+    "pregunta": "Maximiza z = 3x₁ + 2x₂ sujeto a x₁ + x₂ ≤ 4, x₁ ≤ 2, x₂ ≤ 3. ¿Cuál es el valor óptimo de z?",
+    "opciones": ["8", "10", "12", "14"],
+    "respuesta": "10"
+  },
+  {
+    "pregunta": "Minimiza z = x₁ + 2x₂ sujeto a x₁ + x₂ ≥ 6, x₁, x₂ ≥ 0. ¿Cuál es el valor mínimo de z?",
+    "opciones": ["6", "8", "10", "12"],
+    "respuesta": "12"
+  }
+]
